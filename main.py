@@ -18,7 +18,3 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-
-    # Setting background color to white
-    screen.fill(colorWHITE)
-    pygame.display.update()
