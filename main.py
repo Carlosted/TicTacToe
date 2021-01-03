@@ -1,6 +1,5 @@
 import pygame
 import numpy
-# import board
 
 if __name__ == "__main__":
     pass
@@ -18,7 +17,7 @@ if __name__ == "__main__":
     pygame.display.set_caption('TicTacToe')
     pygame.display.set_icon(pygame.image.load('Images/appIcon.png'))
 
-    # White background
+    # White background and lines
     screen.fill(colorWHITE)
     pygame.draw.line(screen, (51), (0, 200), (600, 200))
     pygame.draw.line(screen, (51), (0, 400), (600, 400))
