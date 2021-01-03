@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
     # Title and icon
     pygame.display.set_caption("TicTacToe")
-    pygame.display.set_icon(appIcon))
+    pygame.display.set_icon(appIcon)
 
     # White background and lines
     screen.fill(colorWHITE)
