@@ -5,7 +5,7 @@ if __name__ == "__main__":
     pygame.init()
 
     # Loading images
-    # gameIcon = pygame.image.load("Images/appIcon.png")
+    appIcon = pygame.image.load("Images/appIcon.png")
     # xImage = pygame.image.load("Images/X.png")
     # oImage = pygame.image.load("Images/O.png")
 
@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
     # Title and icon
     pygame.display.set_caption("TicTacToe")
-    pygame.display.set_icon(pygame.image.load("Images/appIcon.png"))
+    pygame.display.set_icon(appIcon))
 
     # White background and lines
     screen.fill(colorWHITE)
