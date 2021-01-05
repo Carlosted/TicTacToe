@@ -25,8 +25,9 @@ if __name__ == "__main__":
 
     # Initial screen
     def resetGame():
-        global board
+        global board, player
         board = np.zeros((3, 3), int)
+        player = 1
         # White background and lines
         screen.fill(colorWHITE)
         pygame.draw.line(screen, (51), (0, 200), (600, 200))
@@ -48,21 +49,21 @@ if __name__ == "__main__":
             and board[1][1] == board[2][0]
         ):
             return board[0][2]
+        # Checking for rows and columns
         for i in range(3):
-            # Checking for rows
             if (
                 board[i][0] != 0
                 and board[i][0] == board[i][1]
                 and board[i][1] == board[i][2]
             ):
                 return board[i][0]
-            # Checking for columns
             if (
                 board[0][i] != 0
                 and board[0][i] == board[1][i]
                 and board[1][i] == board[2][i]
             ):
                 return board[0][i]
+        for i in range(3):
             for j in range(3):
                 # Checking for not tie
                 if board[i][j] == 0:
