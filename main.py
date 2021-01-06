@@ -15,6 +15,7 @@ if __name__ == "__main__":
     colorWHITE = (255, 255, 255)
     run = True
     player = 1
+    board = np.zeros((3, 3), int)
 
     # Create screen
     screen = pygame.display.set_mode(dimensions)
@@ -25,9 +26,6 @@ if __name__ == "__main__":
 
     # Initial screen
     def resetGame():
-        global board, player
-        board = np.zeros((3, 3), int)
-        player = 1
         # White background and lines
         screen.fill(colorWHITE)
         pygame.draw.line(screen, (51), (0, 200), (600, 200))
@@ -42,13 +40,13 @@ if __name__ == "__main__":
             and board[0][0] == board[1][1]
             and board[1][1] == board[2][2]
         ):
-            return board[0][0]
+            return ((0, 0), (2, 2))
         if (
             board[0][2] != 0
             and board[0][2] == board[1][1]
             and board[1][1] == board[2][0]
         ):
-            return board[0][2]
+            return ((0, 2), (2, 0))
         # Checking for rows and columns
         for i in range(3):
             if (
@@ -56,27 +54,34 @@ if __name__ == "__main__":
                 and board[i][0] == board[i][1]
                 and board[i][1] == board[i][2]
             ):
-                return board[i][0]
+                return ((i, 0), (i, 2))
             if (
                 board[0][i] != 0
                 and board[0][i] == board[1][i]
                 and board[1][i] == board[2][i]
             ):
-                return board[0][i]
+                return ((0, i), (2, i))
         for i in range(3):
             for j in range(3):
                 # Checking for not tie
                 if board[i][j] == 0:
                     return 0
-        return 3
+        return None
 
-    def endGame(end):
-        if end == 1:
-            print("X won!")
-        elif end == 2:
-            print("O won!")
-        elif end == 3:
+    def endGame(cords):
+        # Reversing them because I fucked up
+        cord0 = cords[0][::-1]
+        cord1 = cords[1][::-1]
+        if cords == 0:
             print("Tie")
+        else:
+            pygame.draw.line(
+                screen,
+                (200, 0, 40),
+                [s * 200 + 100 for s in cord0],
+                [f * 200 + 100 for f in cord1],
+                12,
+            )
 
     # Initial update
     resetGame()
@@ -92,11 +97,13 @@ if __name__ == "__main__":
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     resetGame()
+                    player = 1
+                    board = np.zeros((3, 3), int)
 
         # Update
         # Check for win or tie
         end = winCheck()
-        if end > 0:
+        if end:
             endGame(end)
         if isinstance(click, np.ndarray):
             # updating board and player
