@@ -16,6 +16,7 @@ if __name__ == "__main__":
     run = True
     player = 1
     board = np.zeros((3, 3), int)
+    isBot = False
 
     # Create screen
     screen = pygame.display.set_mode(dimensions)
@@ -95,17 +96,23 @@ if __name__ == "__main__":
             if event.type == pygame.MOUSEBUTTONDOWN:
                 click = np.floor(np.divide(pygame.mouse.get_pos(), 200))
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    resetGame()
-                    player = 1
-                    board = np.zeros((3, 3), int)
+                if event.key == pygame.K_TAB:
+                    isBot = not isBot
+                resetGame()
+                player = 1
+                board = np.zeros((3, 3), int)
 
         # Update
         # Check for win or tie
         end = winCheck()
         if end:
             endGame(end)
-        if isinstance(click, np.ndarray):
+        # Bot turn
+        if isBot and player == 2:
+            print("Bot move")
+            player = 1
+
+        if (not isBot or player == 1) and isinstance(click, np.ndarray):
             # updating board and player
             if board[int(click[1])][int(click[0])] == 0:
                 board[int(click[1])][int(click[0])] = player
